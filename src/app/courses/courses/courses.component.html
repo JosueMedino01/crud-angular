@@ -5,8 +5,7 @@
     </mat-toolbar>
     <div *ngIf="(courses$ | async) as courses; else loading">
       <table mat-table [dataSource]="courses" class="mat-elevation-z8">
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are setloading as a property on the row definition" -->
+
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Nome </th>
@@ -20,10 +19,30 @@
             <mat-icon>{{ course.category | category }}</mat-icon>
           </td>
         </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-mini-fab (click)="onAdd()">
+                <mat-icon class="mat-18">add</mat-icon>
+            </button>
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let course">
+            <button mat-icon-button >
+              <mat-icon class="mat-18">edit</mat-icon>
+            </button>
+            <button mat-icon-button >
+              <mat-icon class="mat-18">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
+
     <ng-template #loading>
       <div class="loading-spinner">
         <mat-spinner color="accent"></mat-spinner>

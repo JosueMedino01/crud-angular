@@ -4,6 +4,7 @@ import { Observable, catchError, of } from 'rxjs';
 import { CoursesService } from '../../services/courses.service';
 import { Course } from '../model/course';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -12,11 +13,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CoursesComponent implements OnInit{
   courses$: Observable<Course[]>;
-  displayedColumns = ['name', 'category'];
+  displayedColumns = ['name', 'category', 'actions'];
 
   constructor(
     private coursesService:CoursesService,
     private _snackBar: MatSnackBar,
+    private router:Router,
+    private route:ActivatedRoute,
   ){
     this.courses$ = this.coursesService.list()
     .pipe(
@@ -31,5 +34,9 @@ export class CoursesComponent implements OnInit{
   }
 
   ngOnInit(){
+  }
+
+  onAdd(){
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 }

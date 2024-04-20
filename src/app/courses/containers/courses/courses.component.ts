@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 
-import { CoursesService } from '../../services/courses.service';
-import { Course } from '../model/course';
+import { CoursesService } from '../../../services/courses.service';
+import { Course } from '../../model/course';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 

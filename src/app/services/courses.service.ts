@@ -21,6 +21,7 @@ export class CoursesService {
   }
 
   save(record: Partial<Course>){
+
     if(record._id){
       return this.update(record);
     }
@@ -37,6 +38,7 @@ export class CoursesService {
   }
 
   private update(record: Partial<Course>){
-    return this.httpClient.put<Course>(`${this.API}/${record._id}`, {record}).pipe(first());
+    console.log("update: ", record)
+    return this.httpClient.put<Course>(`${this.API}/${record._id}`, record).pipe(first());
   }
 }

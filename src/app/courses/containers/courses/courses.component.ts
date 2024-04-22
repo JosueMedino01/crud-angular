@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './courses.component.scss'
 })
 export class CoursesComponent implements OnInit{
-  courses$: Observable<Course[]>;
+  courses$: Observable<Course[]> | null = null;
 
   constructor(
     private coursesService:CoursesService,
@@ -20,19 +20,20 @@ export class CoursesComponent implements OnInit{
     private router:Router,
     private route:ActivatedRoute,
   ){
-    this.courses$ = this.coursesService.list()
-    .pipe(
-      catchError(error => {
-        _snackBar.open("Erro ao carregar cursos!", "OK", {
-          horizontalPosition: 'right',
-          verticalPosition: 'bottom'
-        })
-        return of([]);
-      })
-    );
+    this.onRefresh();
   }
 
   ngOnInit(){
+  }
+
+  onRefresh(){
+    this.courses$ = this.coursesService.list()
+    .pipe(
+      catchError(error => {
+        this.onMessage("Erro ao carregar cursos!");
+        return of([]);
+      })
+    );
   }
 
   onAdd(){
@@ -41,5 +42,22 @@ export class CoursesComponent implements OnInit{
 
   onEdit(course: Course){
     this.router.navigate(['edit/', course._id], {relativeTo: this.route})
+  }
+
+  onDelete(course: Course){
+    this.coursesService.remove(course._id).subscribe({
+      next: () => {
+        this.onRefresh();
+        this.onMessage("Curso deletado com sucesso!");
+      }
+    });
+  }
+
+  onMessage(message: string){
+    this._snackBar.open(message, "OK", {
+      horizontalPosition:'left',
+      verticalPosition: 'bottom',
+      duration: 5000
+    });
   }
 }

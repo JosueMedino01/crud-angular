@@ -41,4 +41,8 @@ export class CoursesService {
     console.log("update: ", record)
     return this.httpClient.put<Course>(`${this.API}/${record._id}`, record).pipe(first());
   }
+
+    remove(id: string){
+      return this.httpClient.delete(`${this.API}/${id}`).pipe(first());
+    }
 }

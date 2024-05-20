@@ -5,18 +5,28 @@
     </mat-toolbar>
 
     <mat-card-content>
-      <mat-form-field appearance="outline" class="w-100">
+      <mat-form-field appearance="outline" class="w-100 mb-2">
         <mat-label>Nome</mat-label>
-        <input matInput placeholder="Nome" formControlName="name" required>
+        <input matInput
+               placeholder="Nome"
+               formControlName="name"
+               #name>
+        <mat-hint align="end">{{name.value.length}}/100</mat-hint>
+        <mat-error *ngIf="formCourse.get('name')?.invalid">
+          {{getErrorMesssage('name')}}
+        </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="w-100">
+      <mat-form-field appearance="outline" class="w-100 mb-2">
         <mat-label>Categoria</mat-label>
         <mat-select formControlName="category" placeholder="Categoria" required>
           <mat-option value="Front-end">Front-end</mat-option>
           <mat-option value="Back-end">Back-end</mat-option>
           <mat-option value="DevOps">DevOps</mat-option>
         </mat-select>
+        <mat-error *ngIf="formCourse.get('category')?.invalid">
+          {{getErrorMesssage('category')}}
+        </mat-error>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions  align="end">

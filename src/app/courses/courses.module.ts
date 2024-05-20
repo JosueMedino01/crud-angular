@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CourseFormComponent } from './containers/course-form/course-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
+import { TourMatMenuModule } from 'ngx-ui-tour-md-menu';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { CoursesListComponent } from './components/courses-list/courses-list.com
     AppMaterialModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class CoursesModule { }

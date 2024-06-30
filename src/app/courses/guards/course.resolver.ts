@@ -10,6 +10,6 @@ export const courseResolver: ResolveFn<Course> = (route, state, coursesService: 
   if(route.params && route.params['id']){
     return coursesService.findById(route.params['id']);
   }
-  return of({_id: '', name: '', category: ''});
+  return of({_id: '', name: '', category: '', lessons:[]});
 
 };

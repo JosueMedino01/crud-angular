@@ -28,6 +28,26 @@
           {{getErrorMesssage('category')}}
         </mat-error>
       </mat-form-field>
+
+      <mat-toolbar class="w-100 mx-0 mb-4">
+        <span>Aulas</span>
+        <button mat-icon-button>
+          <mat-icon class="mat-18">add</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <div formArrayName="lessons" class="mb-2" *ngFor="let lesson of getLessonsFormArray(); let i = index;">
+        <div [formGroupName] = i>
+          <mat-form-field appearance="outline" class="w-50 me-2">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-25">
+            <mat-label>URL</mat-label>
+            <input matInput formControlName="youtubeURL">
+          </mat-form-field>
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions  align="end">
       <button mat-button type="button" color="warn" (click)="onCancel()">Cancelar</button>

@@ -1,7 +1,7 @@
 import { Course, Lesson } from './../../model/course';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, UntypedFormArray, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
@@ -78,6 +78,11 @@ export class CourseFormComponent implements OnInit{
         this.onError(error)
       },
     });
+  }
+
+  getLessonsFormArray(){
+    return (<UntypedFormArray>this.formCourse.get('lessons')).controls;
+
   }
 
   onCancel(){

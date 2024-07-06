@@ -31,21 +31,24 @@
 
       <mat-toolbar class="w-100 mx-0 mb-4">
         <span>Aulas</span>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="addNewLesson()">
           <mat-icon class="mat-18">add</mat-icon>
         </button>
       </mat-toolbar>
 
       <div formArrayName="lessons" class="mb-2" *ngFor="let lesson of getLessonsFormArray(); let i = index;">
-        <div [formGroupName] = i>
-          <mat-form-field appearance="outline" class="w-50 me-2">
+        <div [formGroupName] = i class="row">
+          <mat-form-field appearance="outline" class="col-6">
             <mat-label>Nome</mat-label>
             <input matInput formControlName="name">
           </mat-form-field>
-          <mat-form-field appearance="outline" class="w-25">
+          <mat-form-field appearance="outline" class="col">
             <mat-label>URL</mat-label>
             <input matInput formControlName="youtubeURL">
           </mat-form-field>
+          <button mat-icon-button class="col-3 me-3" (click)="deleteLesson(i)">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
         </div>
       </div>
     </mat-card-content>

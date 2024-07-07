@@ -24,7 +24,7 @@ export class FormUtilsService {
 
   getErrorMesssage(formGroup: UntypedFormGroup, fieldName: string){
     const field = formGroup.get(fieldName) as UntypedFormControl;
-    this.getErrorMesssageFromField(field);
+    return this.getErrorMesssageFromField(field);
   }
 
   getErrorMesssageFromField(field: UntypedFormControl){

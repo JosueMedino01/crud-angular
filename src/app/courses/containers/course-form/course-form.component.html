@@ -13,7 +13,7 @@
                #name>
         <mat-hint align="end">{{name.value.length}}/100</mat-hint>
         <mat-error *ngIf="formCourse.get('name')?.invalid">
-          {{getErrorMesssage('name')}}
+          {{formUtils.getErrorMesssage(formCourse, 'name')}}
         </mat-error>
       </mat-form-field>
 
@@ -22,10 +22,9 @@
         <mat-select formControlName="category" placeholder="Categoria" required>
           <mat-option value="Front-end">Front-end</mat-option>
           <mat-option value="Back-end">Back-end</mat-option>
-          <mat-option value="DevOps">DevOps</mat-option>
         </mat-select>
         <mat-error *ngIf="formCourse.get('category')?.invalid">
-          {{getErrorMesssage('category')}}
+          {{formUtils.getErrorMesssage(formCourse, 'category')}}
         </mat-error>
       </mat-form-field>
 
@@ -35,7 +34,7 @@
           <mat-icon class="mat-18">add</mat-icon>
         </button>
       </mat-toolbar>
-      <mat-error *ngIf="isFormArrayRequired()">
+      <mat-error *ngIf="formUtils.isFormArrayRequired(formCourse, 'lessons')">
         Adicione pelo menos uma aula.
       </mat-error>
 
@@ -45,14 +44,14 @@
             <mat-label>Nome</mat-label>
             <input matInput formControlName="name">
             <mat-error *ngIf="getLessonsFormArray()[i].get('name')?.invalid">
-              Campo inválido
+              {{formUtils.getFormArrayFieldErrorMessage(formCourse, 'lessons', 'name', i)}}
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="col">
             <mat-label>URL</mat-label>
             <input matInput formControlName="youtubeURL">
             <mat-error *ngIf="getLessonsFormArray()[i].get('youtubeURL')?.invalid">
-              Campo inválido
+              {{formUtils.getFormArrayFieldErrorMessage(formCourse, 'lessons', 'youtubeURL', i)}}
             </mat-error>
           </mat-form-field>
           <button mat-icon-button class="col-3 me-3" (click)="deleteLesson(i)">
